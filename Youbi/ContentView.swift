@@ -52,7 +52,7 @@ struct ContentView: View {
             let dateFormatter = DateFormatter()
 
             // Impostare il formato della data
-            var _: () = dateFormatter.dateFormat = "EEEE, dd MMMM yyyy"
+            var _: () = dateFormatter.dateFormat = "EEEE,  MMMM dd "
 
             // Convertire la data in una stringa
             let dateString = dateFormatter.string(from: currentDate)
@@ -75,6 +75,13 @@ struct ContentView: View {
                 .font(.system(size: 30))
                 
         }
+        .containerBackground(
+                LinearGradient(
+                    gradient: Gradient(colors: [Color(red: 0.8, green: 0.7, blue: 0.5), Color(red: 0.9, green: 0.85, blue: 0.75)]), // Marroncino chiaro
+                    startPoint: .topLeading,
+                    endPoint: .bottomTrailing
+                ), for: .window
+            )
         .padding()
     }
 }
