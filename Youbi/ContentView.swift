@@ -83,6 +83,7 @@ struct ContentView: View {
                 ), for: .window
             )
         .padding()
+        .textSelection(.enabled)
     }
 }
 

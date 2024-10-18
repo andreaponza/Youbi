@@ -167,5 +167,6 @@ struct YoubiWidgetEntryView: View {
                 ), for: .widget
             )
         .cornerRadius(10)  // Aggiungi un arrotondamento per migliorare l'estetica
+        .textSelection(.enabled)
     }
 }
