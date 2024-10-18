@@ -123,7 +123,7 @@ struct YoubiWidgetEntryView: View {
             let dateFormatter = DateFormatter()
 
             // Impostare il formato della data
-            var _: () = dateFormatter.dateFormat = "EEEE\n dd\n MMMM"
+            var _: () = dateFormatter.dateFormat = "EEEE\n MMMM\n dd"
 
             // Convertire la data in una stringa
             let dateString = dateFormatter.string(from: currentDate)
