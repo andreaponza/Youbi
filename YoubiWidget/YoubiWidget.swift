@@ -9,7 +9,7 @@ import WidgetKit
 import SwiftUI
 import Foundation
 
-// Mappature per i numeri giapponesi (kanji, hiragana, romaji)
+// Map japanise number (kanji, hiragana, romaji)
 let kanjiNumbers = ["一", "二", "三", "四", "五", "六", "七", "八", "九", "十", "十一", "十二", "十三", "十四", "十五", "十六", "十七", "十八", "十九", "二十", "二十一", "二十二", "二十三", "二十四", "二十五", "二十六", "二十七", "二十八", "二十九", "三十", "三十一"]
 
 let hiraganaDays = ["いちにち", "ふつか", "みっか", "よっか", "いつか", "むいか", "なのか", "ようか", "ここのか", "とおか", "じゅういちにち", "じゅうににち", "じゅうさんにち", "じゅうよっか", "じゅうごにち", "じゅうろくにち", "じゅうしちにち", "じゅうはちにち", "じゅうくにち", "はつか", "にじゅういちにち", "にじゅうににち", "にじゅうさんにち", "にじゅうよっか", "にじゅうごにち", "にじゅうろくにち", "にじゅうしちにち", "にじゅうはちにち", "にじゅうくにち", "さんじゅうにち", "さんじゅういちにち"]
@@ -26,22 +26,22 @@ let kanjiDaysOfWeek = ["日曜日", "月曜日", "火曜日", "水曜日", "木�
 let hiraganaDaysOfWeek = ["にちようび", "げつようび", "かようび", "すいようび", "もくようび", "きんようび", "どようび"]
 let romajiDaysOfWeek = ["nichiyoubi", "getsuyoubi", "kayoubi", "suiyoubi", "mokuyoubi", "kinyoubi", "doyoubi"]
 
-// Funzione per ottenere i formati giapponesi del giorno
+// Day format metod
 func japaneseDay(for day: Int) -> (kanji: String, hiragana: String, romaji: String) {
     return (kanjiNumbers[day - 1], hiraganaDays[day - 1], romajiDays[day - 1])
 }
 
-// Funzione per ottenere i formati giapponesi del mese
+// Month format metod
 func japaneseMonth(for month: Int) -> (kanji: String, hiragana: String, romaji: String) {
     return (kanjiMonths[month - 1], hiraganaMonths[month - 1], romajiMonths[month - 1])
 }
 
-// Funzione per ottenere i formati giapponesi del giorno della settimana
+// Weekday format metod
 func japaneseDayOfWeek(for weekday: Int) -> (kanji: String, hiragana: String, romaji: String) {
     return (kanjiDaysOfWeek[weekday - 1], hiraganaDaysOfWeek[weekday - 1], romajiDaysOfWeek[weekday - 1])
 }
 
-// Entry del widget che tiene traccia della data e dei dati giapponesi
+// widget entry  to track date and japanise data
 struct YoubiEntry: TimelineEntry {
     let date: Date
     let dayKanji: String
@@ -55,10 +55,10 @@ struct YoubiEntry: TimelineEntry {
     let dayOfWeekRomaji: String
 }
 
-// Provider che gestisce la logica temporale
+// Provider to manage temporal
 struct YoubiProvider: TimelineProvider {
     
-    // Placeholder del widget
+    // Widget placeholder
     func placeholder(in context: Context) -> YoubiEntry {
         YoubiEntry(date: Date(),
                    dayKanji: "一",
@@ -72,13 +72,13 @@ struct YoubiProvider: TimelineProvider {
                    dayOfWeekRomaji: "getsuyoubi")
     }
 
-    // Snapshot istantaneo (anteprime)
+    // Snapshot
     func getSnapshot(in context: Context, completion: @escaping (YoubiEntry) -> ()) {
         let entry = createYoubiEntry()
         completion(entry)
     }
 
-    // Timeline per aggiornare i dati
+    // Update timeline
     func getTimeline(in context: Context, completion: @escaping (Timeline<YoubiEntry>) -> ()) {
         let entry = createYoubiEntry()
         let timeline = Timeline(entries: [entry], policy: .atEnd)
@@ -86,7 +86,7 @@ struct YoubiProvider: TimelineProvider {
     }
 }
 
-// Funzione che crea l'entry con i dati giapponesi del giorno, mese e giorno della settimana
+// Create date with japanise format metod
 func createYoubiEntry() -> YoubiEntry {
     let currentDate = Date()
     let calendar = Calendar.current
@@ -110,22 +110,22 @@ func createYoubiEntry() -> YoubiEntry {
                       dayOfWeekRomaji: dayOfWeekJapanese.romaji)
 }
 
-// Vista del widget che mostra il giorno, il mese e il giorno della settimana in kanji, hiragana e romaji
+// Show data in kanji, hiragana e romaji
 struct YoubiWidgetEntryView: View {
     var entry: YoubiEntry
     
     var body: some View {
         VStack(alignment: .leading) {
-            // Creare un'istanza di Date
+            // Create Date istance
             let currentDate = Date()
 
-            // Creare un'istanza di DateFormatter
+            // Create DateFormatter istance
             let dateFormatter = DateFormatter()
 
-            // Impostare il formato della data
+            // Set date format
             var _: () = dateFormatter.dateFormat = "EEEE\n MMMM\n dd"
 
-            // Convertire la data in una stringa
+            // Covert date in string
             let dateString = dateFormatter.string(from: currentDate)
             
             Text("\(dateString)")
@@ -161,12 +161,11 @@ struct YoubiWidgetEntryView: View {
         }
         .containerBackground(
                 LinearGradient(
-                    gradient: Gradient(colors: [Color(red: 0.8, green: 0.7, blue: 0.5), Color(red: 0.9, green: 0.85, blue: 0.75)]), // Marroncino chiaro
+                    gradient: Gradient(colors: [Color(red: 0.8, green: 0.7, blue: 0.5), Color(red: 0.9, green: 0.85, blue: 0.75)]), // Backround gradient
                     startPoint: .topLeading,
                     endPoint: .bottomTrailing
                 ), for: .widget
             )
-        .cornerRadius(10)  // Aggiungi un arrotondamento per migliorare l'estetica
-        .textSelection(.enabled)
+        .cornerRadius(10)  // Round corner
     }
 }

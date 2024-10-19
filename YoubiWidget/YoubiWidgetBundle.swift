@@ -9,7 +9,7 @@ import SwiftUI
 import WidgetKit
 
 
-// Configurazione principale del widget
+// Widget configuration
 @main
 struct YoubiWidget: Widget {
     let kind: String = "YoubiWidget"
@@ -19,7 +19,7 @@ struct YoubiWidget: Widget {
             YoubiWidgetEntryView(entry: entry)
         }
         .configurationDisplayName("YoubiWidget")
-        .description("Mostra la data di oggi in lettere in italiano.")
+        .description("Show current date in japanise")
     }
 }
 

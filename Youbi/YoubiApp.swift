@@ -14,6 +14,7 @@ struct YoubiApp: App {
         WindowGroup {
             ContentView()
         }
+        .windowStyle(HiddenTitleBarWindowStyle())
     }
 }
 class AppDelegate: NSObject, NSApplicationDelegate {
