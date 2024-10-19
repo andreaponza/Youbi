@@ -1,2 +1,3 @@
 # Youbi
-Un widget che mostra la data di oggi in Kanji Hiragana e Romaji
+Widget for display today date in Kanji Hiragana e Romaji
+![youbi](youbi.png)
