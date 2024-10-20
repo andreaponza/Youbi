@@ -7,6 +7,22 @@
 
 import SwiftUI
 import Foundation
+import AVFoundation
+
+func readDate(_ testo: String) {
+    let synthesizer = AVSpeechSynthesizer()
+    let utterance = AVSpeechUtterance(string: testo)
+    
+    // Imposta la lingua giapponese
+    utterance.voice = AVSpeechSynthesisVoice(language: "ja-JP")
+    
+    // Configura la velocità e il tono della voce
+    utterance.rate = AVSpeechUtteranceDefaultSpeechRate
+    utterance.pitchMultiplier = 1.0
+    
+    // Avvia la sintesi vocale
+    synthesizer.speak(utterance)
+}
 
 // japanis number map (kanji, hiragana, romaji)
 let kanjiNumbers = ["一", "二", "三", "四", "五", "六", "七", "八", "九", "十", "十一", "十二", "十三", "十四", "十五", "十六", "十七", "十八", "十九", "二十", "二十一", "二十二", "二十三", "二十四", "二十五", "二十六", "二十七", "二十八", "二十九", "三十", "三十一"]
@@ -73,6 +89,9 @@ struct ContentView: View {
                 .font(.system(size: 30))
             Text("\(weekday.romaji) \(month.romaji) \(day.romaji)".uppercased())
                 .font(.system(size: 30))
+            Button("🗣️"){
+                readDate("\(weekday.hiragana) \(month.hiragana) \(day.hiragana)")
+            }
                 
         }
         .containerBackground(
